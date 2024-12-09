@@ -1,5 +1,6 @@
 import { test, expect, chromium } from '@playwright/test'
-import { executeQuery } from '../db_connection/database'
+import { executeQueryEC2 } from '../db_connection/database_EC2'
+import { executeQueryRDS } from '../db_connection/database_RDS'
 import { LoginPageWWW } from '../../pages/tc-www/LoginPageWWW'
 import { DashboardPageWWW } from '../../pages/tc-www/DashboardPageWWW'
 import { LoginPageCRT } from '../../pages/tc-studio/LoginPageCRT'
@@ -35,8 +36,8 @@ test.describe('Review Audits Suite', () => {
     await loginPageWWW.hasTitle(loginDataWWW.title)
 
     // Sign In on TC-WWW Site
-    const decryptedUserEmailWWW = decryptData(process.env.ENCRYPTED_USEREMAIL_WWW)
-    const decryptedPasswordWWW = decryptData(process.env.ENCRYPTED_PASSWORD_WWW)
+    const decryptedUserEmailWWW = decryptData(process.env.ENCRYPTED_USEREMAIL_WWW,process.env.SECRET_KEY)
+    const decryptedPasswordWWW = decryptData(process.env.ENCRYPTED_PASSWORD_WWW,process.env.SECRET_KEY)
     await loginPageWWW.enterUserEmail(decryptedUserEmailWWW)
     await loginPageWWW.enterPassword(decryptedPasswordWWW)
     await loginPageWWW.clickOnLoginButton()
@@ -48,8 +49,8 @@ test.describe('Review Audits Suite', () => {
     const loginPageCRT = new LoginPageCRT(tabStudio)
     await loginPageCRT.navigate(process.env.URL_CRT_LOGIN)
     await loginPageCRT.hasTitle(loginDataCRT.title)
-    const decryptedUsernameCRT = decryptData(process.env.ENCRYPTED_USERNAME_CRT)
-    const decryptedPasswordCRT = decryptData(process.env.ENCRYPTED_PASSWORD_CRT )
+    const decryptedUsernameCRT = decryptData(process.env.ENCRYPTED_USERNAME_CRT,process.env.SECRET_KEY)
+    const decryptedPasswordCRT = decryptData(process.env.ENCRYPTED_PASSWORD_CRT,process.env.SECRET_KEY)
     await loginPageCRT.enterUsername(decryptedUsernameCRT)
     await loginPageCRT.enterPassword(decryptedPasswordCRT)
     await loginPageCRT.clickOnLoginButton()
@@ -66,12 +67,13 @@ test.describe('Review Audits Suite', () => {
     // Verify Review Audits on Content Review Page (TC-STUDIO)
     expect(await contentReviewPageCRT.getReviewAuditsTitleText()).toEqual(contentReviewDataCRT.reviewAuditsTitleText)
     // 63-69
-    const albumLegalReviewState = await executeQuery(`
+    const albumLegalReviewState = await executeQueryRDS(`
         SELECT legal_review_state
         FROM albums
         WHERE id = ${await contentReviewPageCRT.getAlbumIDText()}`
     )
-    const albumLegalReviewStateInDB = albumLegalReviewState[0].legal_review_state
+    // const albumLegalReviewStateInDB = albumLegalReviewState[0].legal_review_state
+    const albumLegalReviewStateInDB = albumLegalReviewState[0][0].legal_review_state
     expect(await contentReviewPageCRT.getAlbumReviewAuditsStatusText()).toEqual(albumLegalReviewStateInDB)
     expect(await contentReviewPageCRT.getAlbumReviewAuditsReviewerText()).toEqual(contentReviewDataCRT.albumReviewAuditsReviewerText)
     expect(await contentReviewPageCRT.getAlbumReviewAuditsReviewedAtText()).toEqual(contentReviewDataCRT.albumReviewAuditsReviewedAtText)

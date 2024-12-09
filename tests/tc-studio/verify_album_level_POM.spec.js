@@ -37,8 +37,8 @@ test.describe('Review Audits Suite', () => {
     await loginPageWWW.hasTitle(loginDataWWW.title)
 
     // Sign In on TC-WWW Site
-    const decryptedUserEmailWWW = decryptData(process.env.ENCRYPTED_USEREMAIL_WWW)
-    const decryptedPasswordWWW = decryptData(process.env.ENCRYPTED_PASSWORD_WWW)
+    const decryptedUserEmailWWW = decryptData(process.env.ENCRYPTED_USEREMAIL_WWW,process.env.SECRET_KEY)
+    const decryptedPasswordWWW = decryptData(process.env.ENCRYPTED_PASSWORD_WWW,process.env.SECRET_KEY)
     await loginPageWWW.enterUserEmail(decryptedUserEmailWWW)
     await loginPageWWW.enterPassword(decryptedPasswordWWW)
     await loginPageWWW.clickOnLoginButton()
@@ -50,8 +50,8 @@ test.describe('Review Audits Suite', () => {
     const loginPageCRT = new LoginPageCRT(tabStudio)
     await loginPageCRT.navigate(process.env.URL_CRT_LOGIN)
     await loginPageCRT.hasTitle(loginDataCRT.title)
-    const decryptedUsernameCRT = decryptData(process.env.ENCRYPTED_USERNAME_CRT)
-    const decryptedPasswordCRT = decryptData(process.env.ENCRYPTED_PASSWORD_CRT )
+    const decryptedUsernameCRT = decryptData(process.env.ENCRYPTED_USERNAME_CRT,process.env.SECRET_KEY)
+    const decryptedPasswordCRT = decryptData(process.env.ENCRYPTED_PASSWORD_CRT,process.env.SECRET_KEY)
     await loginPageCRT.enterUsername(decryptedUsernameCRT)
     await loginPageCRT.enterPassword(decryptedPasswordCRT)
     await loginPageCRT.clickOnLoginButton()

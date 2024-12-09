@@ -24,22 +24,11 @@ test.describe('Review Audits Suite', () => {
     const loginPageCRT = new LoginPageCRT(tabStudio)
     await loginPageCRT.navigate(process.env.URL_CRT_LOGIN)
     await loginPageCRT.hasTitle(loginDataCRT.title)
-    // const encryptedUserName = encryptData('test_us1@tunecore.com')
-    // const encryptedPassword = encryptData('Test@123')
-    // console.log(encryptedUserName)
-    // console.log(encryptedPassword)
-    // const encryptedUserName = "U2FsdGVkX18Zz4ciDFApOPxnaTfXhEvsaLVy4Hb7A/NtjkxJ+paV6i7y59xLWnqT"
-    // const encryptedPassword = "U2FsdGVkX1+tqhl93MAbA22Gn+hmCwosW0kvPo7e6VI="
-    // const decryptedUserName = decryptData(process.env.ENCRYPTED_USERNAME_CRT)
-    // const decryptedPassword = decryptData(process.env.ENCRYPTED_PASSWORD_CRT)
-    // console.log(decryptedUserName)
-    // console.log(decryptedPassword)
 
     //Sign In
-    const decryptedUserNameCRT = decryptData(process.env.ENCRYPTED_USERNAME_CRT)
-    const decryptedPasswordCRT = decryptData(process.env.ENCRYPTED_PASSWORD_CRT)
-    // await loginPageCRT.pause()
-    await loginPageCRT.enterUsername(decryptedUserNameCRT)
+    const decryptedUsernameCRT = decryptData(process.env.ENCRYPTED_USERNAME_CRT,process.env.SECRET_KEY)
+    const decryptedPasswordCRT = decryptData(process.env.ENCRYPTED_PASSWORD_CRT,process.env.SECRET_KEY)
+    await loginPageCRT.enterUsername(decryptedUsernameCRT)
     await loginPageCRT.enterPassword(decryptedPasswordCRT)
     await loginPageCRT.clickOnLoginButton()
 

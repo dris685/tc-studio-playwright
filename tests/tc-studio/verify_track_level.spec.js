@@ -1,5 +1,6 @@
 import { test, expect, chromium } from '@playwright/test'
-import { executeQuery } from '../db_connection/database'
+import { executeQueryEC2 } from '../db_connection/database_EC2'
+import { executeQueryRDS } from '../db_connection/database_RDS'
 import { LoginPageWWW } from '../../pages/tc-www/LoginPageWWW'
 import { DashboardPageWWW } from '../../pages/tc-www/DashboardPageWWW'
 import { LoginPageCRT } from '../../pages/tc-studio/LoginPageCRT'
@@ -72,14 +73,14 @@ test.describe.skip('Review Audits Suite', () => {
     expect(await contentReviewPageCRT.getPrimaryArtistNameText()).toEqual(contentReviewDataCRT.primaryArtistNameText)
     expect(await contentReviewPageCRT.getAlbumIDText()).toEqual(contentReviewDataCRT.albumID)
     // 67-74
-    const upcNumInDB = await executeQuery(`
+    const upcNumInDB = await executeQueryRDS(`
         SELECT number
         FROM upcs
         WHERE upcable_id = ${contentReviewDataCRT.albumID}
         AND upcable_type = 'Album'
         AND upc_type = 'tunecore'`
     )
-    expect(await contentReviewPageCRT.getUPCNumberText()).toEqual(upcNumInDB[0].number)
+    expect(await contentReviewPageCRT.getUPCNumberText()).toEqual(upcNumInDB[0][0].number)
     expect(await contentReviewPageCRT.getLabelNameText()).toEqual(contentReviewDataCRT.labelNameText)
     expect(await contentReviewPageCRT.getAlbumCreatedText()).toEqual(contentReviewDataCRT.albumCreatedText)
     expect(await contentReviewPageCRT.getAlbumReleasedText()).toEqual(contentReviewDataCRT.albumReleasedText)

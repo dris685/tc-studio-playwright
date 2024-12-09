@@ -1,5 +1,6 @@
 import { test, expect, chromium } from '@playwright/test'
-import { executeQuery } from '../db_connection/database'
+import { executeQueryEC2 } from '../db_connection/database_EC2'
+import { executeQueryRDS } from '../db_connection/database_RDS'
 import { LoginPageWWW } from '../../pages/tc-www/LoginPageWWW'
 import { DashboardPageWWW } from '../../pages/tc-www/DashboardPageWWW'
 import { LoginPageCRT } from '../../pages/tc-studio/LoginPageCRT'
@@ -36,8 +37,8 @@ test.describe('Customer Account Suite', () => {
     await loginPageWWW.hasTitle(loginDataWWW.title)
 
     // Sign In on TC-WWW Site
-    const decryptedUserEmailWWW = decryptData(process.env.ENCRYPTED_USEREMAIL_WWW)
-    const decryptedPasswordWWW = decryptData(process.env.ENCRYPTED_PASSWORD_WWW)
+    const decryptedUserEmailWWW = decryptData(process.env.ENCRYPTED_USEREMAIL_WWW,process.env.SECRET_KEY)
+    const decryptedPasswordWWW = decryptData(process.env.ENCRYPTED_PASSWORD_WWW,process.env.SECRET_KEY)
     await loginPageWWW.enterUserEmail(decryptedUserEmailWWW)
     await loginPageWWW.enterPassword(decryptedPasswordWWW)
     await loginPageWWW.clickOnLoginButton()
@@ -49,8 +50,8 @@ test.describe('Customer Account Suite', () => {
     const loginPageCRT = new LoginPageCRT(tabStudio)
     await loginPageCRT.navigate(process.env.URL_CRT_LOGIN)
     await loginPageCRT.hasTitle(loginDataCRT.title)
-    const decryptedUsernameCRT = decryptData(process.env.ENCRYPTED_USERNAME_CRT)
-    const decryptedPasswordCRT = decryptData(process.env.ENCRYPTED_PASSWORD_CRT )
+    const decryptedUsernameCRT = decryptData(process.env.ENCRYPTED_USERNAME_CRT,process.env.SECRET_KEY)
+    const decryptedPasswordCRT = decryptData(process.env.ENCRYPTED_PASSWORD_CRT,process.env.SECRET_KEY)
     await loginPageCRT.enterUsername(decryptedUsernameCRT)
     await loginPageCRT.enterPassword(decryptedPasswordCRT)
     await loginPageCRT.clickOnLoginButton()
@@ -75,12 +76,13 @@ test.describe('Customer Account Suite', () => {
     expect(await contentReviewPageCRT.getCountryWebsiteText()).toEqual(contentReviewDataCRT.countryWebsiteText)
     expect(await contentReviewPageCRT.getSiftScoreText()).toEqual(contentReviewDataCRT.siftScoreText)
     // 72-78
-    const scoreNum = await executeQuery(`
+    const scoreNum = await executeQueryRDS(`
         SELECT score
         FROM person_sift_scores
         WHERE person_id = ${await contentReviewPageCRT.getPersonIdText()}`
     )
-    const scoreNumInDB = Math.round(parseFloat(scoreNum[0].score)*100)
+    // const scoreNumInDB = Math.round(parseFloat(scoreNum[0].score)*100)
+    const scoreNumInDB = Math.round(parseFloat(scoreNum[0][0].score)*100)
     expect(await contentReviewPageCRT.getSiftScoreNumberText()).toEqual(scoreNumInDB.toString())
     expect(await contentReviewPageCRT.getVipTagText()).toEqual(contentReviewDataCRT.vipTagText)
 
