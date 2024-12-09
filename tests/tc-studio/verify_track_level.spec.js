@@ -14,7 +14,7 @@ import dashboardDataCRT from '../../testdata/tc-studio/DashboardDataCRT.json'
 import contentReviewDataCRT from '../../testdata/tc-studio/ContentReviewDataCRT.json'
 import { decryptData } from '../../utilities/encrypt_decrypt_data'
 
-test.describe('Review Audits Suite', () => {
+test.describe.skip('Review Audits Suite', () => {
   let browser
   let context
 

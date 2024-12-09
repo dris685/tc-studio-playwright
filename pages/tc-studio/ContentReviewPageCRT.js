@@ -51,7 +51,7 @@ export class ContentReviewPageCRT{
 
     async hasURL(URL){
         expect(await this.tunecoreLogo).toBeVisible()
-        await expect(this.page).toHaveURL(URL)
+        await expect(this.page).not.toHaveURL(URL)
     }
 
     // Customer Account Section

@@ -12,6 +12,10 @@ export class LoginPageCRT{
         await this.page.goto(url)
     }
 
+    async pause(){
+        await this.page.pause()
+    }
+
     async hasTitle(title){
         await expect(this.page).toHaveTitle(title)
     }

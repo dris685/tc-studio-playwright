@@ -38,6 +38,7 @@ test.describe('Review Audits Suite', () => {
     //Sign In
     const decryptedUserNameCRT = decryptData(process.env.ENCRYPTED_USERNAME_CRT)
     const decryptedPasswordCRT = decryptData(process.env.ENCRYPTED_PASSWORD_CRT)
+    await loginPageCRT.pause()
     await loginPageCRT.enterUsername(decryptedUserNameCRT)
     await loginPageCRT.enterPassword(decryptedPasswordCRT)
     await loginPageCRT.clickOnLoginButton()
