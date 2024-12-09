@@ -48,7 +48,7 @@ test.describe('Review Audits Suite', () => {
     expect(await dashboardPageCRT.getDashboardText()).toEqual(dashboardDataCRT.dashboardText)
     await dashboardPageCRT.clickOnContentReviewLink()
     const contentReviewPageCRT = new ContentReviewPageCRT(tabStudio)
-    await contentReviewPageCRT.hasURL(process.env.URL_CRT_CONTENTREVIEW)
+    await contentReviewPageCRT.doesNotHaveURL(process.env.URL_CRT_CONTENTREVIEW)
   })
 
   

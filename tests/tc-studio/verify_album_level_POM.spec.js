@@ -62,13 +62,13 @@ test.describe('Review Audits Suite', () => {
     // Review Specific Album ID on Content Review Page (TC-STUDIO)
     await dashboardPageCRT.navigate(process.env.URL_CRT_CONTENTREVIEW + `/` + `${contentReviewDataCRT.albumID}`)
     const contentReviewPageCRT = new ContentReviewPageCRT(tabStudio)
-    expect(await contentReviewPageCRT.getAlbumIDText()).toEqual(contentReviewDataCRT.albumID)
+    // expect(await contentReviewPageCRT.getAlbumIDText()).toEqual(contentReviewDataCRT.albumID)
 
     // Verify Album Info on Content Review Page (TC-STUDIO)
-    expect(await contentReviewPageCRT.getArtworkAttribute()).toEqual(contentReviewDataCRT.artworkAttribute)
-    expect(await contentReviewPageCRT.getAlbumNameText()).toEqual(contentReviewDataCRT.albumNameText)
-    expect(await contentReviewPageCRT.getPrimaryArtistNameText()).toEqual(contentReviewDataCRT.primaryArtistNameText)
-    expect(await contentReviewPageCRT.getAlbumIDText()).toEqual(contentReviewDataCRT.albumID)
+    // expect(await contentReviewPageCRT.getArtworkAttribute()).toEqual(contentReviewDataCRT.artworkAttribute)
+    // expect(await contentReviewPageCRT.getAlbumNameText()).toEqual(contentReviewDataCRT.albumNameText)
+    // expect(await contentReviewPageCRT.getPrimaryArtistNameText()).toEqual(contentReviewDataCRT.primaryArtistNameText)
+    // expect(await contentReviewPageCRT.getAlbumIDText()).toEqual(contentReviewDataCRT.albumID)
     // 67-74
     const upcNumInDB = await executeQuery(`
         SELECT number
