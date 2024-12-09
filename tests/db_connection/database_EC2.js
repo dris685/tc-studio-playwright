@@ -1,6 +1,6 @@
 import * as mariadb from 'mariadb'
 
-export async function executeQuery(query) {
+export async function executeQueryEC2(query) {
   
   const dbHost = process.env.HOST
   const dbUser = process.env.USERNAME
@@ -8,7 +8,7 @@ export async function executeQuery(query) {
   const dbName = process.env.DATABASENAME
   const dbPort = process.env.PORT
 
-  const conn = await mariadb.createConnection({
+  const connection = await mariadb.createConnection({
     host: dbHost,
     user: dbUser,
     password: dbPassword,
@@ -17,11 +17,11 @@ export async function executeQuery(query) {
   })
 
   try {
-    const res = await conn.query(query)
-    return res
-  } catch (e) {
-    console.log(e)
+    const response = await connection.query(query)
+    return response
+  } catch (error) {
+    console.log(error)
   } finally {
-    conn.end()
+    connection.end()
   }
 }

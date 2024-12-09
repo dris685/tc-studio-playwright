@@ -34,7 +34,7 @@ module.exports = defineConfig({
     // baseURL: 'http://127.0.0.1:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    headless: false, // Run in headed mode
+    headless: true, // Run in headed mode
     browserName: 'chromium', // Default browser (can also be 'firefox' or 'webkit')
     viewport: { width: 1280, height: 720 }, // Set viewport size
     screenshot: 'only-on-failure', // Take screenshots on failure

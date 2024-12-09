@@ -7,8 +7,9 @@
     "env_QA4": "cross-env TEST_ENV=qa4 npx playwright test tests/tc-studio",
     "env_STAGING": "cross-env TEST_ENV=staging npx playwright test tests/tc-studio",
     "env_QA3_spec": "cross-env TEST_ENV=qa3 npx playwright test tc-studio/verify_album_level_POM.spec.js",
-    "env_QA4_spec": "cross-env TEST_ENV=qa4 npx playwright test tc-studio/sign_in_POM.spec.js",
+    "env_QA4_spec": "cross-env TEST_ENV=qa4 npx playwright test tc-studio/verify_album_level_POM.spec.js",
     "env_STAGING_spec": "cross-env TEST_ENV=staging npx playwright test tc-studio/verify_album_level_POM.spec.js",
+    "env_STAGING2_spec": "cross-env TEST_ENV=staging2 npx playwright test tc-studio/verify_album_level_POM.spec.js",
     "allure_report": "allure serve allure-results",
     "clean_up_allure_report": "cleandir allure-results & cleandir allure-report"
   },
@@ -26,6 +27,7 @@
     "cross-env": "^7.0.3",
     "crypto-js": "^4.2.0",
     "dotenv": "^16.4.5",
-    "mariadb": "^3.3.2"
+    "mariadb": "^3.3.2",
+    "mysql2": "^3.11.5"
   }
 }
