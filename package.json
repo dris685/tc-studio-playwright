@@ -1,0 +1,31 @@
+{
+  "name": "playwright-with-retool",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "env_QA3": "cross-env TEST_ENV=qa3 npx playwright test tests/tc-studio",
+    "env_QA4": "cross-env TEST_ENV=qa4 npx playwright test tests/tc-studio",
+    "env_STAGING": "cross-env TEST_ENV=staging npx playwright test tests/tc-studio",
+    "env_QA3_spec": "cross-env TEST_ENV=qa3 npx playwright test tc-studio/sign_in_POM.spec.js",
+    "env_QA4_spec": "cross-env TEST_ENV=qa4 npx playwright test tc-studio/sign_in_POM.spec.js",
+    "env_STAGING_spec": "cross-env TEST_ENV=staging npx playwright test tc-studio/verify_review_audits_POM.spec.js",
+    "allure_report": "allure serve allure-results",
+    "clean_up_allure_report": "cleandir allure-results & cleandir allure-report"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@faker-js/faker": "^9.0.3",
+    "@playwright/test": "^1.48.0",
+    "@types/node": "^22.7.5",
+    "allure-playwright": "^3.0.6"
+  },
+  "dependencies": {
+    "cross-env": "^7.0.3",
+    "crypto-js": "^4.2.0",
+    "dotenv": "^16.4.5",
+    "mariadb": "^3.3.2"
+  }
+}
