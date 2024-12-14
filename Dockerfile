@@ -13,7 +13,7 @@ RUN npm install
 RUN apt-get update && apt-get install -y wget gnupg ca-certificates && \
    curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
    apt install -y nodejs
-RUN npx playwright install chromium
+RUN npx playwright install
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
