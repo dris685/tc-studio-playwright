@@ -6,7 +6,7 @@ import loginDataCRT from '../../testdata/tc-studio/LoginDataCRT.json'
 import dashboardDataCRT from '../../testdata/tc-studio/DashboardDataCRT.json'
 import { decryptData } from '../../utilities/encrypt_decrypt_data'
 
-test.describe('Review Audits Suite', () => {
+test.describe('Sign In Suite', () => {
   let browser
   let context
 

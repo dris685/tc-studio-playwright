@@ -11,9 +11,10 @@
     "env_STAGING_ui": "cross-env TEST_ENV=staging npx playwright test tests/tc-studio --ui",
     "env_QA3_spec": "cross-env TEST_ENV=qa3 npx playwright test tc-studio/sign_in_codegen.spec",
     "env_QA4_spec": "cross-env TEST_ENV=qa4 npx playwright test tc-studio/verify_album_level_POM.spec.js",
-    "env_STAGING_spec": "cross-env TEST_ENV=staging npx playwright test tc-studio/verify_album_level_POM.spec.js",
-    "allure_report": "allure serve allure-results",
-    "clean_up_allure_report": "cleandir allure-results & cleandir allure-report"
+    "env_STAGING_spec": "cross-env TEST_ENV=staging npx playwright test tc-studio/sign_in.spec.js",
+    "allure_report": "allure serve allure-results --host 0.0.0.0 --port 7500",
+    "clean_up_allure_report": "cleandir allure-results & cleandir allure-report",
+    "html_report": "npx playwright show-report --host 0.0.0.0 --port 7500"
   },
   "keywords": [],
   "author": "",

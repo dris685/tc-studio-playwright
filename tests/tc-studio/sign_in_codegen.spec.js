@@ -2,7 +2,7 @@ import { test, expect, chromium } from '@playwright/test'
 import { LoginPageCRT } from '../../pages/tc-studio/LoginPageCRT'
 import loginDataCRT from '../../testdata/tc-studio/LoginDataCRT.json'
 
-test.describe.skip('Review Audits Suite', () => {
+test.describe.skip('Sign In Codegen Suite', () => {
   let browser
   let context
 
