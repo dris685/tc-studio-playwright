@@ -13,7 +13,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 git(
-                    url: 'https://github.com/dris685/tc-studio-playwright.git',
+                    url: 'git@github.com:dris685/tc-studio-playwright.git',
                     credentialsId: 'Jenkins GitHub SSH Key'
                 )
             }
