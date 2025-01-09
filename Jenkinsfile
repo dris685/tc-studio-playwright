@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         // Use the ID you provided for the credentials
-        // GIT_CREDENTIALS = credentials('Jenkins GitHub SSH Key')
+        GIT_CREDENTIALS = credentials('Jenkins GitHub SSH Key')
 
         // Set Docker Hub credentials and repository name
         DOCKER_HUB_REPO = "dris685/playwright"
@@ -14,7 +14,7 @@ pipeline {
             steps {
                 git(
                     url: 'https://github.com/dris685/tc-studio-playwright.git',
-                    // credentialsId: 'Jenkins GitHub SSH Key'
+                    credentialsId: 'Jenkins GitHub SSH Key'
                 )
             }
         }
